@@ -5,10 +5,10 @@ from dash import Dash, dcc, html, Input, Output, callback, State, dash_table
 import dash_bootstrap_components as dbc
 
 # %%
-data = pd.read_csv("/Users/tilliedavies/Desktop/DS 4003/data.csv")
+data = pd.read_csv("data/data.csv")
 
 # %%
-results = pd.read_csv("/Users/tilliedavies/Desktop/DS 4003/Final Project/F1 Data/results.csv")
+results = pd.read_csv("data/results.csv")
 data2 = pd.merge(results, data[['raceId','driverRef','year','round','driverId']], how='left', on=['driverId','raceId'])
 data2 = data2.drop_duplicates()
 
@@ -19,7 +19,7 @@ data2.dropna(inplace=True)
 data2['round'] = data2['round'].astype(int)
 
 # %%
-drivers = pd.read_csv("/Users/tilliedavies/Desktop/DS 4003/Final Project/F1 Data/drivers.csv")
+drivers = pd.read_csv("data/drivers.csv")
 
 # %%
 data['AvgPitStopDuration'] = data.groupby(['raceId', 'driverId'])['pitStopDuration'].transform('mean')
@@ -38,7 +38,7 @@ app.layout = html.Div([
     html.Div(
         children=[
             html.H1('Formula 1 Dashboard',className="app-header--title"),
-            html.Img(src='/Users/tilliedavies/Desktop/DS 4003/Final Project/F1.png', style={'width': '50%', 'height': '50%'})
+            html.Img(src='data/F1.png', style={'width': '50%', 'height': '50%'})
         ]
     ),
     html.Div(
