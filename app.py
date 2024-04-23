@@ -92,13 +92,11 @@ app.layout = html.Div([
     html.Div([
         html.Div(style={'position': 'absolute', 'top': '10px', 'right': '10px'}, children=[
             html.A(html.Button('GitHub', style={'margin-right': '10px'}), href='https://github.com/tildavies/Final_Dashboard/', target='_blank')]),
-        html.H4('Distribution of Lap Speeds', style={'padding-top':'40px'}),
-        dcc.Graph(id='hist', style={'width': '100%', 'display': 'inline-block'})],style={'width': '30%', 'display': 'inline-block','vertical-align': 'top','padding-top': '20px', 'padding-left':'38px'}),
+        html.H4('Distribution of Lap Speeds', style={'padding-top':'20px'}),
+        dcc.Graph(id='hist', style={'width': '100%', 'display': 'inline-block'})],style={'width': '30%', 'display': 'inline-block','vertical-align': 'top','padding-top': '5px', 'padding-left':'38px'}),
         html.H5('Driver Lookup'),
         dcc.Input(id='search-input', type='text', placeholder='Enter last name...',style={'width': '30%', 'display': 'inline-block','padding-left': '20px','padding-top': '20px'}),
-        html.Div(id='search-output',style={'width': '100%', 'display': 'inline-block','padding-left': '20px'}),
-        html.H4('Driver Nationalities',style={'padding-top':'40px'}),
-        dcc.Graph(id='world-map',style={'width': '100%', 'display': 'inline-block','padding-left': '0px'}),
+        html.Div(id='search-output',style={'width': '100%', 'display': 'inline-block','padding-left': '20px'})
     ],style={'vertical-align': 'top'})    
 
 ##########################################################
@@ -203,36 +201,6 @@ def update_hist(selected_race):
     fig2.update_xaxes(title_text='Fastest Lap Speed (km/hr)')
     fig2.update_traces(hoverinfo='skip')
     return fig2
-
-@app.callback(
-    Output('world-map', 'figure'),
-    [Input('world-map', 'clickData')]
-)
-def update_map(click_data):
-    # Group data by nationality and count the number of drivers
-    nationality_counts = drivers['nationality'].value_counts().reset_index()
-    nationality_counts.columns = ['nationality', 'Count']
-    
-    # Create choropleth map with Plotly
-    fig7 = go.Figure(go.Choropleth(
-        locations=nationality_counts['nationality'],
-        z=nationality_counts['Count'],
-        locationmode='country names',
-        colorscale='Reds',
-        colorbar_title='Driver Count',
-        zmin=0,
-        zmax=50
-    ))
-
-    fig7.update_layout(
-        geo=dict(
-            showcoastlines=True,
-        ),
-        mapbox_style="carto-positron"
-    )
-
-    return fig7
-
 
 
 
