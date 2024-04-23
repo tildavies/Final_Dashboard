@@ -80,7 +80,7 @@ app.layout = html.Div([
             id='image-dropdown',
             options=[{'label': option, 'value': option} for option in image_paths.keys()],
             value='Australian Grand Prix'),
-        html.Img(id='image-display'),
+        html.Img(id='image-display',style={'width': '50%', 'height': 'auto'} ),
         html.H4('Comparing Grand Prix Pit Stops'),
         dcc.Dropdown(
             id='grandprix-select',
@@ -97,10 +97,8 @@ app.layout = html.Div([
         html.Div(id='search-output',style={'width': '100%', 'display': 'inline-block','padding-left': '20px'}),
         html.H4('Driver Nationalities',style={'padding-top':'40px'}),
         dcc.Graph(id='world-map',style={'width': '100%', 'display': 'inline-block','padding-left': '20px'}),
-        dcc.Location(id='url', refresh=False),
-        html.Button('Visit My GitHub', id='github-button', n_clicks=0),
-        html.Div(id='redirect-div')
-              ],style={'width': '30%', 'display': 'inline-block','vertical-align': 'top','padding-left': '20px', 'padding-top': '20px'})
+        html.Div(style={'position': 'absolute', 'top': '10px', 'right': '10px'}, children=[
+            html.A(html.Button('GitHub', style={'margin-right': '10px'}), href='https://github.com/tildavies/Final_Dashboard/', target='_blank')])])
 ],style={'vertical-align': 'top'})    
 
 ##########################################################
@@ -235,16 +233,7 @@ def update_map(click_data):
 
     return fig7
 
-@app.callback(
-    Output('redirect-div', 'children'),
-    [Input('github-button', 'n_clicks')]
-)
-def redirect_to_github(n_clicks):
-    if n_clicks > 0:
-        github_url = 'https://github.com/tildavies/Final_Dashboard/'
-        return github_url
-    else:
-        return ''
+
 
 
 # Run the app
