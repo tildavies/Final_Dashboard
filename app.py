@@ -110,9 +110,7 @@ app.layout = html.Div([
 )
 def updateanimation(selected_year):
     filtered_df2 = data2[data2['year'] == selected_year]
-    sorted_df = filtered_df2.sort_values(by='accumulated_points', ascending=True)
-    
-    fig1 = px.bar(sorted_df, 
+    fig1 = px.bar(filtered_df2, 
                   x='accumulated_points', 
                   y='driverRef',
                   orientation='h',
