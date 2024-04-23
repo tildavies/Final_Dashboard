@@ -91,14 +91,15 @@ app.layout = html.Div([
         html.H4('Distribution of Lap Speeds', style={'padding-top':'40px'}),
         dcc.Graph(id='hist', style={'width': '100%', 'display': 'inline-block'})],style={'width': '30%', 'display': 'inline-block','vertical-align': 'top','padding-top': '20px', 'padding-left':'38px'}),
     html.Div([
+        html.Div(style={'position': 'absolute', 'top': '10px', 'right': '10px'}, children=[
+            html.A(html.Button('GitHub', style={'margin-right': '10px'}), href='https://github.com/tildavies/Final_Dashboard/', target='_blank')]),
         html.Img(src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/1280px-F1.svg.png', style={'width': '50%', 'height': '50%','vertical-align': 'top'}),
-        html.H4('Driver Lookup'),
+        html.H5('Driver Lookup'),
         dcc.Input(id='search-input', type='text', placeholder='Enter last name...',style={'width': '30%', 'display': 'inline-block','padding-left': '20px','padding-top': '20px'}),
         html.Div(id='search-output',style={'width': '100%', 'display': 'inline-block','padding-left': '20px'}),
         html.H4('Driver Nationalities',style={'padding-top':'40px'}),
         dcc.Graph(id='world-map',style={'width': '100%', 'display': 'inline-block','padding-left': '20px'}),
-        html.Div(style={'position': 'absolute', 'top': '10px', 'right': '10px'}, children=[
-            html.A(html.Button('GitHub', style={'margin-right': '10px'}), href='https://github.com/tildavies/Final_Dashboard/', target='_blank')])])
+        ])
 ],style={'vertical-align': 'top'})    
 
 ##########################################################
