@@ -6,9 +6,9 @@ import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
 
 # %%
-data = pd.read_csv("data.csv")
-drivers = pd.read_csv("drivers.csv")
-results = pd.read_csv("results.csv")
+data = pd.read_csv("data/data.csv")
+drivers = pd.read_csv("data/drivers.csv")
+results = pd.read_csv("data/results.csv")
 
 # %%
 data2 = pd.merge(results, data[['raceId','driverRef','year','round','driverId']], how='left', on=['driverId','raceId'])
@@ -90,7 +90,7 @@ app.layout = html.Div([
         html.H4('Distribution of Lap Speeds', style={'padding-top':'40px'}),
         dcc.Graph(id='hist', style={'width': '100%', 'display': 'inline-block'})],style={'width': '30%', 'display': 'inline-block','vertical-align': 'top','padding-top': '20px'}),
     html.Div([
-        html.Img(src='/Users/tilliedavies/Desktop/DS 4003/Final Project/F1.png', style={'width': '50%', 'height': '50%','vertical-align': 'top'}),
+        html.Img(src='data/F1.png', style={'width': '50%', 'height': '50%','vertical-align': 'top'}),
         html.H4('Driver Lookup'),
         dcc.Input(id='search-input', type='text', placeholder='Enter last name...',style={'width': '30%', 'display': 'inline-block','padding-left': '20px','padding-top': '20px'}),
         html.Div(id='search-output',style={'width': '100%', 'display': 'inline-block','padding-left': '20px'}),
