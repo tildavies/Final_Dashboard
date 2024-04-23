@@ -95,8 +95,8 @@ app.layout = html.Div([
         html.H4('Distribution of Lap Speeds', style={'padding-top':'20px'}),
         dcc.Graph(id='hist', style={'width': '100%', 'display': 'inline-block'})],style={'width': '30%', 'display': 'inline-block','vertical-align': 'top','padding-top': '5px', 'padding-left':'38px'}),
         html.H5('Driver Lookup'),
-        dcc.Input(id='search-input', type='text', placeholder='Enter last name...',style={'width': '30%', 'display': 'inline-block','padding-left': '20px','padding-top': '20px'}),
-        html.Div(id='search-output',style={'width': '100%', 'display': 'inline-block','padding-left': '20px'})
+        dcc.Input(id='search-input', type='text', placeholder='Enter last name...',style={'width': '30%', 'display': 'inline-block','padding-left': '20px','padding-top': '10px'}),
+        html.Div(id='search-output',style={'width': '30%', 'display': 'inline-block','padding-left': '20px'})
     ],style={'vertical-align': 'top'})    
 
 ##########################################################
