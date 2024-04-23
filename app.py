@@ -4,7 +4,6 @@ import plotly.express as px
 from dash import Dash, dcc, html, Input, Output, callback, State, dash_table
 import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
-import webbrowser
 
 # %%
 data = pd.read_csv("data/data.csv")
@@ -98,6 +97,7 @@ app.layout = html.Div([
         html.Div(id='search-output',style={'width': '100%', 'display': 'inline-block','padding-left': '20px'}),
         html.H4('Driver Nationalities',style={'padding-top':'40px'}),
         dcc.Graph(id='world-map',style={'width': '100%', 'display': 'inline-block','padding-left': '20px'}),
+        dcc.Location(id='url', refresh=False),
         html.Button('Visit My GitHub', id='github-button', n_clicks=0),
         html.Div(id='redirect-div')
               ],style={'width': '30%', 'display': 'inline-block','vertical-align': 'top','padding-left': '20px', 'padding-top': '20px'})
@@ -242,8 +242,7 @@ def update_map(click_data):
 def redirect_to_github(n_clicks):
     if n_clicks > 0:
         github_url = 'https://github.com/tildavies/Final_Dashboard/'
-        webbrowser.open_new_tab(github_url)
-        return html.P('Redirecting to GitHub...')
+        return github_url
     else:
         return ''
 
