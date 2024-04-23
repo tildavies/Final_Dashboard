@@ -4,6 +4,7 @@ import plotly.express as px
 from dash import Dash, dcc, html, Input, Output, callback, State, dash_table
 import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
+import webbrowser
 
 # %%
 data = pd.read_csv("data/data.csv")
@@ -25,27 +26,28 @@ data2.sort_values(by='round', inplace=True)
 
 # %%
 image_paths = {
-    'Abu Dhabi Grand Prix': 'abudhabi.png',
-    'Austrian Grand Prix': 'austrain.png',
-    'Azerbaijan Grand Prix': 'azerbaijan.png',
-    'Bahrain Grand Prix': 'bahrain.png',
-    'Belgian Grand Prix':'belgian.png',
-    'Brazilian Grand Prix':'brazilian.png',
-    'British Grand Prix':'british.png',
-    'Canadian Grand Prix':'canadian.png',
-    'Chinese Grand Prix':'chinese.png',
-    'Dutch Grand Prix':'dutch.png',
-    'Hungarian Grand Prix':'hungarian.png',
-    'Italian Grand Prix':'italian.png',
-    'Japanese Grand Prix':'japanese.png',
-    'Mexican Grand Prix':'mexican.png',
-    'Miami Grand Prix':'miami.png',
-    'Monaco Grand Prix':'monaco.png',
-    'Qatar Grand Prix':'qatar.png',
-    'Saudi Arabian Grand Prix':'saudiaraibian.png',
-    'Singapore Grand Prix':'singapore.png',
-    'Spanish Grand Prix':'spanish.png',
-    'United States Grand Prix':'us.png'
+    'Abu Dhabi Grand Prix': 'https://cdn.racingnews365.com/Circuits/Abu-Dhabi/_503xAUTO_crop_center-center_none/f1_2024_abu_outline.png?v=1708705548',
+    'Australian Grand Prix': 'https://cdn.racingnews365.com/Circuits/Australia/_503xAUTO_crop_center-center_none/f1_2024_aus_outline.png?v=1708703549',
+    'Austrian Grand Prix': 'https://cdn.racingnews365.com/Circuits/Austria/_503xAUTO_crop_center-center_none/f1_2024_aut_outline.png?v=1708704458',
+    'Azerbaijan Grand Prix': 'https://cdn.racingnews365.com/Circuits/Azerbaijan/_503xAUTO_crop_center-center_none/f1_2024_aze_outline.png?v=1708704459',
+    'Bahrain Grand Prix': 'https://cdn.racingnews365.com/Circuits/Bahrain/_503xAUTO_crop_center-center_none/f1_2024_bhr_outline.png?v=1708703548',
+    'Belgian Grand Prix':'https://cdn.racingnews365.com/Circuits/Belgium/_503xAUTO_crop_center-center_none/f1_2024_bel_outline.png?v=1708704458',
+    'Brazilian Grand Prix':'https://cdn.racingnews365.com/Circuits/Brazil/_503xAUTO_crop_center-center_none/f1_2024_bra_outline.png?v=1708705480',
+    'British Grand Prix':'https://cdn.racingnews365.com/Circuits/Great-Britain/_503xAUTO_crop_center-center_none/f1_2024_gbr_outline.png?v=1708704458',
+    'Canadian Grand Prix':'https://cdn.racingnews365.com/Circuits/Canada/_503xAUTO_crop_center-center_none/f1_2024_can_outline.png?v=1708704457',
+    'Chinese Grand Prix':'https://cdn.racingnews365.com/Circuits/China/_503xAUTO_crop_center-center_none/f1_2024_chn_outline.png?v=1708703688',
+    'Dutch Grand Prix':'https://cdn.racingnews365.com/Circuits/The-Netherlands/_503xAUTO_crop_center-center_none/f1_2024_nld_outline.png?v=1708704459',
+    'Hungarian Grand Prix':'https://cdn.racingnews365.com/Circuits/Hungary/_503xAUTO_crop_center-center_none/f1_2024_hun_outline.png?v=1708704458',
+    'Italian Grand Prix':'https://cdn.racingnews365.com/Circuits/Italy/_503xAUTO_crop_center-center_none/f1_2024_ita_outline.png?v=1708704459',
+    'Japanese Grand Prix':'https://cdn.racingnews365.com/Circuits/Japan/_503xAUTO_crop_center-center_none/f1_2024_jap_outline.png?v=1708703688',
+    'Mexican Grand Prix':'https://cdn.racingnews365.com/Circuits/Mexico/_503xAUTO_crop_center-center_none/f1_2024_mex_outline.png?v=1708704579',
+    'Miami Grand Prix':'https://cdn.racingnews365.com/Circuits/Miami/_503xAUTO_crop_center-center_none/f1_2024_mia_outline.png?v=1708703688',
+    'Monaco Grand Prix':'https://cdn.racingnews365.com/Circuits/Monaco/_503xAUTO_crop_center-center_none/f1_2024_mco_outline.png?v=1708704457',
+    'Qatar Grand Prix':'https://cdn.racingnews365.com/Circuits/Qatar/_503xAUTO_crop_center-center_none/f1_2024_qat_outline.png?v=1708705481',
+    'Saudi Arabian Grand Prix':'https://cdn.racingnews365.com/Circuits/Saudi-Arabia/_503xAUTO_crop_center-center_none/f1_2024_sau_outline.png?v=1708703549',
+    'Singapore Grand Prix':'https://cdn.racingnews365.com/Circuits/Singapore/_503xAUTO_crop_center-center_none/f1_2024_sgp_outline.png?v=1708704459',
+    'Spanish Grand Prix':'https://cdn.racingnews365.com/Circuits/Spain/_503xAUTO_crop_center-center_none/f1_2024_spn_outline.png?v=1708704458',
+    'United States Grand Prix':'https://cdn.racingnews365.com/Circuits/United-States/_503xAUTO_crop_center-center_none/f1_2024_usa_outline.png?v=1708704579'
 }
 
 # %%
@@ -55,7 +57,7 @@ server = app.server
 app.layout = html.Div([
     html.Div(
         children=[
-            html.H1('Formula 1 Dashboard',className="app-header--title")
+            html.H1('Formula 1 Dashboard',className="app-header--title", style={'padding-top':'40px'})
         ]
     ),
     html.Div(
@@ -88,14 +90,16 @@ app.layout = html.Div([
             style={'width': '100%', 'display': 'inline-block'}),
         dcc.Graph(id='graph', style={'width': '100%', 'display': 'inline-block'}),
         html.H4('Distribution of Lap Speeds', style={'padding-top':'40px'}),
-        dcc.Graph(id='hist', style={'width': '100%', 'display': 'inline-block'})],style={'width': '30%', 'display': 'inline-block','vertical-align': 'top','padding-top': '20px'}),
+        dcc.Graph(id='hist', style={'width': '100%', 'display': 'inline-block'})],style={'width': '30%', 'display': 'inline-block','vertical-align': 'top','padding-top': '20px', 'padding-left':'38px'}),
     html.Div([
-        html.Img(src='data/F1.png', style={'width': '50%', 'height': '50%','vertical-align': 'top'}),
+        html.Img(src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/1280px-F1.svg.png', style={'width': '50%', 'height': '50%','vertical-align': 'top'}),
         html.H4('Driver Lookup'),
         dcc.Input(id='search-input', type='text', placeholder='Enter last name...',style={'width': '30%', 'display': 'inline-block','padding-left': '20px','padding-top': '20px'}),
         html.Div(id='search-output',style={'width': '100%', 'display': 'inline-block','padding-left': '20px'}),
         html.H4('Driver Nationalities',style={'padding-top':'40px'}),
-        dcc.Graph(id='world-map',style={'width': '100%', 'display': 'inline-block','padding-left': '20px'})
+        dcc.Graph(id='world-map',style={'width': '100%', 'display': 'inline-block','padding-left': '20px'}),
+        html.Button('Visit My GitHub', id='github-button', n_clicks=0),
+        html.Div(id='redirect-div')
               ],style={'width': '30%', 'display': 'inline-block','vertical-align': 'top','padding-left': '20px', 'padding-top': '20px'})
 ],style={'vertical-align': 'top'})    
 
@@ -230,6 +234,18 @@ def update_map(click_data):
     )
 
     return fig7
+
+@app.callback(
+    Output('redirect-div', 'children'),
+    [Input('github-button', 'n_clicks')]
+)
+def redirect_to_github(n_clicks):
+    if n_clicks > 0:
+        github_url = 'https://github.com/tildavies/Final_Dashboard/'
+        webbrowser.open_new_tab(github_url)
+        return html.P('Redirecting to GitHub...')
+    else:
+        return ''
 
 
 # Run the app
