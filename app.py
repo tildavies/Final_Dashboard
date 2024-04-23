@@ -88,8 +88,7 @@ app.layout = html.Div([
             options= [{'label': name, 'value': name} for name in data['name'].unique()],
             value='Australian Grand Prix',
             style={'width': '100%', 'display': 'inline-block'}),
-        dcc.Graph(id='graph', style={'width': '100%', 'display': 'inline-block'})]),
-        
+        dcc.Graph(id='graph', style={'width': '100%', 'display': 'inline-block'})],style={'width': '30%', 'display': 'inline-block','padding-left': '20px','vertical-align': 'top','padding-top': '20px'}),
     html.Div([
         html.Div(style={'position': 'absolute', 'top': '10px', 'right': '10px'}, children=[
             html.A(html.Button('GitHub', style={'margin-right': '10px'}), href='https://github.com/tildavies/Final_Dashboard/', target='_blank')]),
