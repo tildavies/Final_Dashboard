@@ -4,4 +4,4 @@ pandas
 scikit_learn
 plotly
 gunicorn
-dash_boostrap_components
+dash_bootstrap_components
