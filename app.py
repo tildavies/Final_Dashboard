@@ -56,7 +56,8 @@ server = app.server
 app.layout = html.Div([
     html.Div(
         children=[
-            html.H1('Formula 1 Dashboard',className="app-header--title", style={'padding-top':'40px'})
+            html.H1('Formula 1 Dashboard',className="app-header--title", style={'padding-top':'40px'}),
+            html.Img(src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/1280px-F1.svg.png', style={'width': '50%', 'height': '50%','vertical-align': 'top'}),
         ]
     ),
     html.Div(
@@ -93,7 +94,6 @@ app.layout = html.Div([
     html.Div([
         html.Div(style={'position': 'absolute', 'top': '10px', 'right': '10px'}, children=[
             html.A(html.Button('GitHub', style={'margin-right': '10px'}), href='https://github.com/tildavies/Final_Dashboard/', target='_blank')]),
-        html.Img(src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/1280px-F1.svg.png', style={'width': '50%', 'height': '50%','vertical-align': 'top'}),
         html.H5('Driver Lookup'),
         dcc.Input(id='search-input', type='text', placeholder='Enter last name...',style={'width': '30%', 'display': 'inline-block','padding-left': '20px','padding-top': '20px'}),
         html.Div(id='search-output',style={'width': '100%', 'display': 'inline-block','padding-left': '20px'}),
